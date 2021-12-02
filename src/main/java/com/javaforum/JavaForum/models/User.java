@@ -99,18 +99,17 @@ public class User extends Auditable{
         this.roles = roles;
     }
 
-//    Complete Role First
-//    @JsonIgnore
-//    public List<SimpleGrantedAuthority> getAuthority() {
-//        List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
-//
-//        for (UserRoles r : this.roles) {
-//            String myRole = "ROLE_" + r.getRole()
-//                    .getName()
-//                    .toUpperCase();
-//            rtnList.add(new SimpleGrantedAuthority(myRole));
-//        }
-//
-//        return rtnList;
-//    }
+    @JsonIgnore
+    public List<SimpleGrantedAuthority> getAuthority() {
+        List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
+
+        for (UserRoles r : this.roles) {
+            String myRole = "ROLE_" + r.getRole()
+                    .getName()
+                    .toUpperCase();
+            rtnList.add(new SimpleGrantedAuthority(myRole));
+        }
+
+        return rtnList;
+    }
 }
