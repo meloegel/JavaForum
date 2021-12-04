@@ -1,4 +1,305 @@
-package com.javaforum.JavaForum.handlers;
+//package com.javaforum.JavaForum.handlers;
+//
+//
+//import com.javaforum.JavaForum.exceptions.ResourceFoundException;
+//import com.javaforum.JavaForum.exceptions.ResourceNotFoundException;
+//import com.javaforum.JavaForum.models.ErrorDetail;
+//import com.javaforum.JavaForum.services.HelperFunctions;
+//import org.springframework.beans.ConversionNotSupportedException;
+//import org.springframework.beans.TypeMismatchException;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.core.Ordered;
+//import org.springframework.core.annotation.Order;
+//import org.springframework.http.HttpHeaders;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.http.converter.HttpMessageNotReadableException;
+//import org.springframework.http.converter.HttpMessageNotWritableException;
+//import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
+//import org.springframework.validation.BindException;
+//import org.springframework.web.HttpMediaTypeNotAcceptableException;
+//import org.springframework.web.HttpMediaTypeNotSupportedException;
+//import org.springframework.web.HttpRequestMethodNotSupportedException;
+//import org.springframework.web.bind.MethodArgumentNotValidException;
+//import org.springframework.web.bind.MissingPathVariableException;
+//import org.springframework.web.bind.MissingServletRequestParameterException;
+//import org.springframework.web.bind.ServletRequestBindingException;
+//import org.springframework.web.bind.annotation.ExceptionHandler;
+//import org.springframework.web.bind.annotation.RestControllerAdvice;
+//import org.springframework.web.context.request.WebRequest;
+//import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
+//import org.springframework.web.multipart.support.MissingServletRequestPartException;
+//import org.springframework.web.servlet.NoHandlerFoundException;
+//import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+//
+//import java.util.Arrays;
+//import java.util.Date;
+//
 
-public class RestExceptionHandler {
-}
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+//@RestControllerAdvice
+//public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+//    @Autowired
+//    private HelperFunctions helperFunctions;
+//
+//
+//    public RestExceptionHandler() { super(); }
+//
+//
+//    @ExceptionHandler(ResourceNotFoundException.class)
+//    public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException rnfe) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(HttpStatus.NOT_FOUND.value());
+//        errorDetail.setTitle("Resource Not Found");
+//        errorDetail.setDetail(rnfe.getMessage());
+//        errorDetail.setDeveloperMessage(rnfe.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(rnfe));
+//
+//        return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
+//    }
+//
+//    @ExceptionHandler(ResourceFoundException.class)
+//    public ResponseEntity<?> handleResourceFoundException(ResourceFoundException rfe) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
+//        errorDetail.setTitle("Unexpected Resource");
+//        errorDetail.setDetail(rfe.getMessage());
+//        errorDetail.setDeveloperMessage(rfe.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(rfe));
+//
+//        return new ResponseEntity<>(errorDetail, null, HttpStatus.BAD_REQUEST);
+//    }
+//
+//    @ExceptionHandler(OAuth2AccessDeniedException.class)
+//    public ResponseEntity<?> handleOAuth2AccessDeniedException(OAuth2AccessDeniedException ex) {
+//        return new ResponseEntity<>(ex, null, HttpStatus.resolve(ex.getHttpErrorCode()));
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Rest Internal Exception");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Incorrect method: " + ex.getMethod());
+//        errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Methods are: " + Arrays.toString(ex.getSupportedMethods()));
+//        errorDetail.setDeveloperMessage("HTTP Method Not Valid for Endpoint (check for valid URI and proper HTTP Method)");
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Incorrect content type: " + ex.getContentType());
+//        errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Content / Media Types are: " + ex.getSupportedMediaTypes());
+//        errorDetail.setDeveloperMessage("Content / Media Type Not Valid for Endpoint (check for valid URI and proper content / media type)");
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Unacceptable content type: " + ex.getMessage());
+//        errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Content / Media Types are: " + ex.getSupportedMediaTypes());
+//        errorDetail.setDeveloperMessage("Content / Media Type Not Valid for Endpoint (check for valid URI and proper content / media type)");
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle(ex.getVariableName() + " Missing Path Variable");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Parameter Missing for " + "Path: " + request.getDescription(false));
+//        errorDetail.setDetail("Parameter Missing: " + ex.getParameterName() + " Type: " + ex.getParameterType());
+//        errorDetail.setDeveloperMessage(ex.getMessage() + " " + ex.getClass());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleServletRequestBindingException(ServletRequestBindingException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Path: " + request.getDescription(false) + " Request Binding Exception");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleConversionNotSupported(ConversionNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Path: " + request.getDescription(false) + " Conversion Not Support");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName() + " " + ex.getMostSpecificCause());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Path: " + request.getDescription(false) + " Type Mismatch");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName() + " " + ex.getMostSpecificCause());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Path: " + request.getDescription(false) + " Message Not Readable");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName() + " " + ex.getMostSpecificCause());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Path: " + request.getDescription(false) + " Message Not Writable");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName() + " " + ex.getMostSpecificCause());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Method Argument Not Valid");
+//        errorDetail.setDetail(request.getDescription(false) + " | parameter: " + ex.getParameter());
+//        errorDetail.setDeveloperMessage(ex.getBindingResult().toString());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleMissingServletRequestPart(MissingServletRequestPartException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle(request.getDescription(false) + " Missing Servlet Request");
+//        errorDetail.setDetail("Request Part Name: " + ex.getRequestPartName() + " | " + ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Bind Exception");
+//        errorDetail.setDetail(ex.getMessage());
+//        errorDetail.setDeveloperMessage(ex.getClass().getName() + " " + ex.getBindingResult());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Rest Endpoint Not Valid");
+//        errorDetail.setDetail(request.getDescription(false));
+//        errorDetail.setDeveloperMessage("Rest Handler Not Found (check for valid URI)");
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//
+//
+//    @Override
+//    protected ResponseEntity<Object> handleAsyncRequestTimeoutException(AsyncRequestTimeoutException ex, HttpHeaders headers, HttpStatus status, WebRequest webRequest) {
+//        ErrorDetail errorDetail = new ErrorDetail();
+//        errorDetail.setTimestamp(new Date());
+//        errorDetail.setStatus(status.value());
+//        errorDetail.setTitle("Async Request Timeout Error");
+//        errorDetail.setDetail("path: " + webRequest.getDescription(false));
+//        errorDetail.setDeveloperMessage(ex.getMessage());
+//        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
+//
+//        return new ResponseEntity<>(errorDetail, null, status);
+//    }
+//}
+//
