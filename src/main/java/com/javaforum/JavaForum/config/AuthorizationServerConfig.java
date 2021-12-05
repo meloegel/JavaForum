@@ -59,5 +59,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // here instead of our clients requesting authentication at the endpoint /oauth/token, they request it at the endpoint /login
         endpoints.pathMapping("/oauth/token", "/login");
     }
-
 }

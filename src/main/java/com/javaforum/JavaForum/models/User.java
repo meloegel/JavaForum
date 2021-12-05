@@ -1,20 +1,12 @@
 package com.javaforum.JavaForum.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,28 +21,33 @@ public class User extends Auditable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
 
+
     @Column(nullable = false, unique = true)
     private String username;
+
 
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+
     @Column(nullable = false, unique = true)
     @Email
     private String email;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
+
     public User() {
     }
 
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    public User(String username, String password, String primaryemail) {
+        setUsername(username);
+        setPassword(password);
+        this.email = primaryemail;
     }
 
     public long getUserid() {
@@ -91,7 +88,8 @@ public class User extends Auditable{
         this.email = email;
     }
 
-    public Set<UserRoles> getRoles() {
+    public Set<UserRoles> getRoles()
+    {
         return roles;
     }
 

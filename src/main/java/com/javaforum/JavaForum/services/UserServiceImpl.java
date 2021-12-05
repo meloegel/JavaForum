@@ -41,14 +41,12 @@ public class UserServiceImpl implements UserService{
         return list;
     }
 
-
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     @Override
     public void delete(long id) {
         userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
         userRepository.deleteById(id);
     }
-
 
     @Override
     public User findByName(String name) {
@@ -68,7 +66,6 @@ public class UserServiceImpl implements UserService{
                     .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
             newUser.setUserid(user.getUserid());
         }
-
         newUser.setUsername(user.getUsername().toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setEmail(user.getEmail().toLowerCase());
@@ -78,7 +75,6 @@ public class UserServiceImpl implements UserService{
             Role addRole = roleService.findRoleById(ur.getRole().getRoleid());
             newUser.getRoles().add(new UserRoles(newUser, addRole));
         }
-
         return userRepository.save(newUser);
     }
 
@@ -104,7 +100,6 @@ public class UserServiceImpl implements UserService{
                     currentUser.getRoles().add(new UserRoles(currentUser, addRole));
                 }
             }
-
             return userRepository.save(currentUser);
         } else {
             throw new OAuth2AccessDeniedException();

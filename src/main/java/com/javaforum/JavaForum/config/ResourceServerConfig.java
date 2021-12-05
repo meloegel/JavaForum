@@ -42,7 +42,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/users/**")
                 .hasAnyRole("ADMIN")
                 .antMatchers("/users/**",
-                        "/useremails/**",
                         "/oauth/revoke-token",
                         "/logout")
                 .authenticated()
