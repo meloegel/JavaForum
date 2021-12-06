@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -33,6 +33,9 @@ public class Comment extends Auditable{
     @Column
     private String commentgif;
 
+    @Column(nullable = false)
+    private LocalDateTime timepostedcomment;
+
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"topics", "roles"}, allowSetters = true)
@@ -51,11 +54,12 @@ public class Comment extends Auditable{
         this.topic = topic;
     }
 
-    public Comment(String commentbody, String commentphoto, String commentvideo, String commentgif, User user, Topic topic) {
+    public Comment(String commentbody, String commentphoto, String commentvideo, String commentgif, LocalDateTime timepostedcomment, User user, Topic topic) {
         this.commentbody = commentbody;
         this.commentphoto = commentphoto;
         this.commentvideo = commentvideo;
         this.commentgif = commentgif;
+        this.timepostedcomment = timepostedcomment;
         this.user = user;
         this.topic = topic;
     }
@@ -98,6 +102,14 @@ public class Comment extends Auditable{
 
     public void setCommentgif(String commentgif) {
         this.commentgif = commentgif;
+    }
+
+    public LocalDateTime getTimepostedcomment() {
+        return timepostedcomment;
+    }
+
+    public void setTimepostedcomment(LocalDateTime timepostedcomment) {
+        this.timepostedcomment = timepostedcomment;
     }
 
     public User getUser() {

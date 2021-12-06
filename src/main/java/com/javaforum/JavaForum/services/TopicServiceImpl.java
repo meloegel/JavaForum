@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class TopicServiceImpl implements TopicService{
         newTopic.setTopicvideo(topic.getTopicvideo());
         newTopic.setTopiclink(topic.getTopiclink());
         newTopic.setNsfw(topic.getNsfw());
-        newTopic.setTimeposted(LocalDateTime.now());
+        newTopic.setTimepostedtopic(LocalDateTime.now());
 
         User userInfo = userService.findUserById(userid);
         newTopic.setUser(userInfo);
@@ -112,7 +111,7 @@ public class TopicServiceImpl implements TopicService{
         if (topic.getNsfw() != null) {
             newTopic.setNsfw(topic.getNsfw());
         }
-        newTopic.setTimeposted(LocalDateTime.now());
+        newTopic.setTimepostedtopic(LocalDateTime.now());
 
         return topicRepository.save(newTopic);
     }

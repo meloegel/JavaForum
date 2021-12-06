@@ -1,8 +1,8 @@
 package com.javaforum.JavaForum.services;
 
 import com.javaforum.JavaForum.models.Topic;
-
 import java.util.List;
+
 
 public interface TopicService {
     List<Topic> findAll();

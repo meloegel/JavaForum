@@ -3,10 +3,12 @@ package com.javaforum.JavaForum;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+import com.javaforum.JavaForum.models.Comment;
 import com.javaforum.JavaForum.models.Role;
 import com.javaforum.JavaForum.models.Topic;
 import com.javaforum.JavaForum.models.User;
 import com.javaforum.JavaForum.models.UserRoles;
+import com.javaforum.JavaForum.services.CommentService;
 import com.javaforum.JavaForum.services.RoleService;
 import com.javaforum.JavaForum.services.TopicService;
 import com.javaforum.JavaForum.services.UserService;
@@ -38,6 +40,9 @@ public class SeedData implements CommandLineRunner {
 
     @Autowired
     TopicService topicService;
+
+    @Autowired
+    CommentService commentService;
 
 
     @Transactional
@@ -125,10 +130,11 @@ public class SeedData implements CommandLineRunner {
         userService.save(u6);
 
 
-        Topic foo = new Topic("fart", "fart","fart","fart", "fart", false, LocalDateTime.now(), u1);
-        topicService.save(4,foo);
+        Topic t1 = new Topic("fart", "fart","fart","fart", "fart", false, LocalDateTime.now(), u1);
+        topicService.save(4,t1);
 
-
+        Comment c1 = new Comment("commentBody", "commentPhoto", "commentVideo", "commentGif", LocalDateTime.now(), u1, t1);
+        commentService.save(4,10,c1);
 
 
         if (false) {

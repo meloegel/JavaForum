@@ -31,7 +31,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/webjars/**",
                         "/createNewUser",
                         "/forum/**",
-                        "/topics/**")
+                        "/topics/**",
+                        "/comments/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/users/**")

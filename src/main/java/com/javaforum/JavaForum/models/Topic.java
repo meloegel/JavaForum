@@ -43,44 +43,44 @@ public class Topic extends Auditable{
     private Boolean nsfw;
 
     @Column(nullable = false)
-    private LocalDateTime timeposted;
+    private LocalDateTime timepostedtopic;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"topics", "roles"}, allowSetters = true)
     private User user;
 
-    @OneToMany(mappedBy = "comment_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "topic_id", allowSetters = true)
+    @OneToMany(mappedBy = "commentid", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "topicid", allowSetters = true)
     private List<Comment> comments = new ArrayList<>();
 
     public Topic() {}
 
-    public Topic(String topicname, LocalDateTime timeposted, User user) {
+    public Topic(String topicname, LocalDateTime timepostedtopic, User user) {
         this.topicname = topicname;
-        this.timeposted = timeposted;
+        this.timepostedtopic = timepostedtopic;
         this.user = user;
     }
 
-    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timeposted, User user) {
+    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timepostedtopic, User user) {
         this.topicname = topicname;
         this.topicbody = topicbody;
         this.topicphoto = topicphoto;
         this.topicvideo = topicvideo;
         this.topiclink = topiclink;
         this.nsfw = nsfw;
-        this.timeposted = timeposted;
+        this.timepostedtopic = timepostedtopic;
         this.user = user;
     }
 
-    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timeposted, User user, List<Comment> comments) {
+    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timepostedtopic, User user, List<Comment> comments) {
         this.topicname = topicname;
         this.topicbody = topicbody;
         this.topicphoto = topicphoto;
         this.topicvideo = topicvideo;
         this.topiclink = topiclink;
         this.nsfw = nsfw;
-        this.timeposted = timeposted;
+        this.timepostedtopic = timepostedtopic;
         this.user = user;
         this.comments = comments;
     }
@@ -141,12 +141,12 @@ public class Topic extends Auditable{
         this.nsfw = nsfw;
     }
 
-    public LocalDateTime getTimeposted() {
-        return timeposted;
+    public LocalDateTime getTimepostedtopic() {
+        return timepostedtopic;
     }
 
-    public void setTimeposted(LocalDateTime timeposted) {
-        this.timeposted = timeposted;
+    public void setTimepostedtopic(LocalDateTime timepostedtopic) {
+        this.timepostedtopic = timepostedtopic;
     }
 
     public User getUser() {
