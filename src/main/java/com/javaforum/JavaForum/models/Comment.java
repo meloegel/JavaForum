@@ -1,7 +1,7 @@
 package com.javaforum.JavaForum.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -20,84 +19,85 @@ public class Comment extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long comment_id;
+    private long commentid;
 
     @Column(nullable = false)
-    private String comment_body;
+    private String commentbody;
 
     @Column
-    private String comment_photo;
+    private String commentphoto;
 
     @Column
-    private String comment_video;
+    private String commentvideo;
 
     @Column
-    private String comment_gif;
+    private String commentgif;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"topics", "roles"}, allowSetters = true)
     private User user;
 
-    @OneToMany(mappedBy = "topic_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "comment_id", allowSetters = true)
+    @ManyToOne
+    @JoinColumn(name = "topicid", nullable = false)
+    @JsonIgnoreProperties(value = "commentid", allowSetters = true)
     private Topic topic;
 
     public Comment() {}
 
-    public Comment(String comment_body, User user, Topic topic) {
-        this.comment_body = comment_body;
+    public Comment(String commentbody, User user, Topic topic) {
+        this.commentbody = commentbody;
         this.user = user;
         this.topic = topic;
     }
 
-    public Comment(String comment_body, String comment_photo, String comment_video, String comment_gif, User user, Topic topic) {
-        this.comment_body = comment_body;
-        this.comment_photo = comment_photo;
-        this.comment_video = comment_video;
-        this.comment_gif = comment_gif;
+    public Comment(String commentbody, String commentphoto, String commentvideo, String commentgif, User user, Topic topic) {
+        this.commentbody = commentbody;
+        this.commentphoto = commentphoto;
+        this.commentvideo = commentvideo;
+        this.commentgif = commentgif;
         this.user = user;
         this.topic = topic;
     }
 
-    public long getComment_id() {
-        return comment_id;
+    public long getCommentid() {
+        return commentid;
     }
 
-    public void setComment_id(long comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentid(long commentid) {
+        this.commentid = commentid;
     }
 
-    public String getComment_body() {
-        return comment_body;
+    public String getCommentbody() {
+        return commentbody;
     }
 
-    public void setComment_body(String comment_body) {
-        this.comment_body = comment_body;
+    public void setCommentbody(String commentbody) {
+        this.commentbody = commentbody;
     }
 
-    public String getComment_photo() {
-        return comment_photo;
+    public String getCommentphoto() {
+        return commentphoto;
     }
 
-    public void setComment_photo(String comment_photo) {
-        this.comment_photo = comment_photo;
+    public void setCommentphoto(String commentphoto) {
+        this.commentphoto = commentphoto;
     }
 
-    public String getComment_video() {
-        return comment_video;
+    public String getCommentvideo() {
+        return commentvideo;
     }
 
-    public void setComment_video(String comment_video) {
-        this.comment_video = comment_video;
+    public void setCommentvideo(String commentvideo) {
+        this.commentvideo = commentvideo;
     }
 
-    public String getComment_gif() {
-        return comment_gif;
+    public String getCommentgif() {
+        return commentgif;
     }
 
-    public void setComment_gif(String comment_gif) {
-        this.comment_gif = comment_gif;
+    public void setCommentgif(String commentgif) {
+        this.commentgif = commentgif;
     }
 
     public User getUser() {

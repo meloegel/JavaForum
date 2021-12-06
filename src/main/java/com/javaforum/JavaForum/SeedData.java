@@ -4,15 +4,19 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.javaforum.JavaForum.models.Role;
+import com.javaforum.JavaForum.models.Topic;
 import com.javaforum.JavaForum.models.User;
 import com.javaforum.JavaForum.models.UserRoles;
 import com.javaforum.JavaForum.services.RoleService;
+import com.javaforum.JavaForum.services.TopicService;
 import com.javaforum.JavaForum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.Locale;
 
 
@@ -31,6 +35,9 @@ public class SeedData implements CommandLineRunner {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TopicService topicService;
 
 
     @Transactional
@@ -116,6 +123,14 @@ public class SeedData implements CommandLineRunner {
                         r3));
 
         userService.save(u6);
+
+
+        Topic foo = new Topic("fart", "fart","fart","fart", "fart", false, LocalDateTime.now(), u1);
+        topicService.save(4,foo);
+
+
+
+
         if (false) {
 
             FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-US"),

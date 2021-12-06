@@ -22,28 +22,28 @@ public class Topic extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long topic_id;
+    private long topicid;
 
     @Column(nullable = false, unique = true)
-    private String topic_name;
+    private String topicname;
 
     @Column
-    private String topic_body;
+    private String topicbody;
 
     @Column
-    private String topic_photo;
+    private String topicphoto;
 
     @Column
-    private String topic_video;
+    private String topicvideo;
 
     @Column
-    private String topic_link;
+    private String topiclink;
 
     @Column
     private Boolean nsfw;
 
     @Column(nullable = false)
-    private LocalDateTime time_posted;
+    private LocalDateTime timeposted;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
@@ -56,70 +56,81 @@ public class Topic extends Auditable{
 
     public Topic() {}
 
-    public Topic(String topic_name, LocalDateTime time_posted, User user) {
-        this.topic_name = topic_name;
-        this.time_posted = time_posted;
+    public Topic(String topicname, LocalDateTime timeposted, User user) {
+        this.topicname = topicname;
+        this.timeposted = timeposted;
         this.user = user;
     }
 
-    public Topic(String topic_name, String topic_body, String topic_photo, String topic_video, String topic_link, Boolean nsfw, LocalDateTime time_posted, User user, List<Comment> comments) {
-        this.topic_name = topic_name;
-        this.topic_body = topic_body;
-        this.topic_photo = topic_photo;
-        this.topic_video = topic_video;
-        this.topic_link = topic_link;
+    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timeposted, User user) {
+        this.topicname = topicname;
+        this.topicbody = topicbody;
+        this.topicphoto = topicphoto;
+        this.topicvideo = topicvideo;
+        this.topiclink = topiclink;
         this.nsfw = nsfw;
-        this.time_posted = time_posted;
+        this.timeposted = timeposted;
+        this.user = user;
+    }
+
+    public Topic(String topicname, String topicbody, String topicphoto, String topicvideo, String topiclink, Boolean nsfw, LocalDateTime timeposted, User user, List<Comment> comments) {
+        this.topicname = topicname;
+        this.topicbody = topicbody;
+        this.topicphoto = topicphoto;
+        this.topicvideo = topicvideo;
+        this.topiclink = topiclink;
+        this.nsfw = nsfw;
+        this.timeposted = timeposted;
         this.user = user;
         this.comments = comments;
     }
 
-    public long getTopic_id() {
-        return topic_id;
+    public long getTopicid() {
+        return topicid;
     }
 
-    public void setTopic_id(long topic_id) {
-        this.topic_id = topic_id;
+    public void setTopicid(long topicid) {
+        this.topicid = topicid;
     }
 
-    public String getTopic_name() {
-        return topic_name;
+    public String getTopicname() {
+        return topicname;
     }
 
-    public void setTopic_name(String topic_name) {
-        this.topic_name = topic_name;
+    public void setTopicname(String topicname) {
+        this.topicname = topicname;
     }
 
-    public String getTopic_body() {
-        return topic_body;
+    public String getTopicbody() {
+        return topicbody;
     }
 
-    public void setTopic_body(String topic_body) {
-        this.topic_body = topic_body;
+    public void setTopicbody(String topicbody) {
+        this.topicbody = topicbody;
     }
 
-    public String getTopic_photo() {
-        return topic_photo;
+    public String getTopicphoto() {
+        return topicphoto;
     }
 
-    public void setTopic_photo(String topic_photo) {
-        this.topic_photo = topic_photo;
+    public void setTopicphoto(String topicphoto) {
+        this.topicphoto = topicphoto;
     }
 
-    public String getTopic_video() {
-        return topic_video;
+    public String getTopicvideo() {
+        return topicvideo;
     }
 
-    public void setTopic_video(String topic_video) {
-        this.topic_video = topic_video;
+    public void setTopicvideo(String topicvideo) {
+        this.topicvideo = topicvideo;
     }
 
-    public String getTopic_link() {
-        return topic_link;
+    public String getTopiclink() {
+        return topiclink;
     }
 
-    public void setTopic_link(String topic_link) {
-        this.topic_link = topic_link;
+    public void setTopiclink(String topiclink) {
+        this.topiclink = topiclink;
     }
 
     public Boolean getNsfw() {
@@ -130,12 +141,12 @@ public class Topic extends Auditable{
         this.nsfw = nsfw;
     }
 
-    public LocalDateTime getTime_posted() {
-        return time_posted;
+    public LocalDateTime getTimeposted() {
+        return timeposted;
     }
 
-    public void setTime_posted(LocalDateTime time_posted) {
-        this.time_posted = time_posted;
+    public void setTimeposted(LocalDateTime timeposted) {
+        this.timeposted = timeposted;
     }
 
     public User getUser() {

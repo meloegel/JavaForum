@@ -30,7 +30,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/v2/api-docs",
                         "/webjars/**",
                         "/createNewUser",
-                        "/forum/**")
+                        "/forum/**",
+                        "/topics/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/users/**")
