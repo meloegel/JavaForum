@@ -61,8 +61,9 @@ public class TopicController {
     }
 
     // Given a complete Topic Object, create a new Topic record.
-    // http://localhost:2019/topics/topic
-    // @param newTopic A complete new topic to add.
+    // http://localhost:2019/topics/4/topic
+    // @param newTopic - A complete new topic to add.
+    // @param userid - id of user posting topic
     // @return A location header with the URI to the newly created topic and a status of CREATED
     @PostMapping(value = "/{userid}/topic", consumes = "application/json")
     public ResponseEntity<?> addNewTopic(@PathVariable long userid, @Valid @RequestBody Topic newTopic) throws URISyntaxException {

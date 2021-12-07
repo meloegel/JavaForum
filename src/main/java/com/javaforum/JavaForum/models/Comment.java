@@ -43,7 +43,7 @@ public class Comment extends Auditable{
 
     @ManyToOne
     @JoinColumn(name = "topicid", nullable = false)
-    @JsonIgnoreProperties(value = "commentid", allowSetters = true)
+    @JsonIgnoreProperties(value = "comments", allowSetters = true)
     private Topic topic;
 
     public Comment() {}
