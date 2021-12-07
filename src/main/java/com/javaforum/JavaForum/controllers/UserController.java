@@ -86,8 +86,8 @@ public class UserController {
     // Given a complete User Object, Given the user id, primary key, is in the User table,
     // replace the User record and Useremail records. ** Roles are handled through different endpoints **
     // Link: http://localhost:2019/users/user/15
-    // @param updateUser - A complete User including all emails and
-    //           roles to be used to replace the User. Roles must already exist.
+    // @param updateUser - A complete User including
+    //      roles to be used to replace the User. Roles must already exist.
     // @param userid     The primary key of the user you wish to replace.
     @PutMapping(value = "/user/{userId}", consumes = "application/json")
     public ResponseEntity<?> updateFullUser(@Valid @RequestBody User updatedUser, @PathVariable long userId) {
@@ -99,7 +99,6 @@ public class UserController {
     // Updates the user record associated with the given id with the provided data.
     //       Only the provided fields are affected.
     // Roles are handled through different endpoints
-    // If an email list is given, it replaces the original email list.
     // Link: http://localhost:2019/users/user/7
     // @param updateUser - An object containing values for just the fields that are being updated.
     //      All other fields are left NULL.
