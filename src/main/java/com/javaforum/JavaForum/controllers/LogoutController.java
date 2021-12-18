@@ -28,6 +28,6 @@ public class LogoutController {
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
             tokenStore.removeAccessToken(accessToken);
         }
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

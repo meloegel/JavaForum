@@ -133,8 +133,25 @@ public class SeedData implements CommandLineRunner {
         Topic t1 = new Topic("fart", "fart","fart","fart", "fart", false, LocalDateTime.now(), u1);
         topicService.save(4,t1);
 
+        Topic t2 = new Topic("farting", "farting","farting","farting", "farting", true, LocalDateTime.now(), u1);
+        topicService.save(4,t2);
+
+        Topic t3 = new Topic("test", "test","test","test", "test", false, LocalDateTime.now(), u1);
+        topicService.save(4,t3);
+
         Comment c1 = new Comment("commentBody", "commentPhoto", "commentVideo", "commentGif", LocalDateTime.now(), u1, t1);
         commentService.save(4,10,c1);
+
+        Comment c2 = new Comment("commentBody2", "commentPhoto2", "commentVideo2", "commentGif2", LocalDateTime.now(), u1, t1);
+        commentService.save(4,10,c2);
+
+        Comment c3 = new Comment("commentBody", "commentPhoto", "commentVideo", "commentGif", LocalDateTime.now(), u1, t2);
+        commentService.save(4,11,c3);
+
+        Comment c4 = new Comment("commentBody", "commentPhoto", "commentVideo", "commentGif", LocalDateTime.now(), u1, t3);
+        commentService.save(4,12,c4);
+
+
 
 
         if (false) {
