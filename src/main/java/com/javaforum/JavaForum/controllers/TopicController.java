@@ -1,7 +1,9 @@
 package com.javaforum.JavaForum.controllers;
 
 import com.javaforum.JavaForum.models.Topic;
+import com.javaforum.JavaForum.models.User;
 import com.javaforum.JavaForum.services.TopicService;
+import com.javaforum.JavaForum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,12 +30,22 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private UserService userService;
+
     // Returns a list of all topics
     // Link: http://localhost:2019/topics/topics
     @GetMapping(value = "/topics", produces = "application/json")
     public ResponseEntity<?> listAllTopics(){
         List<Topic> allTopics = topicService.findAll();
         return new ResponseEntity<>(allTopics, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/topics/{userid}", produces = "application/json")
+    public ResponseEntity<?> listAllTopicsByUser(@PathVariable Long userid) {
+        User user = userService.findUserById(userid);
+        List<Topic> allTopicsByUser = topicService.findAllTopicsByUser(user);
+        return new ResponseEntity<>(allTopicsByUser, HttpStatus.OK);
     }
 
     // Return a Topic object based on a given topicname

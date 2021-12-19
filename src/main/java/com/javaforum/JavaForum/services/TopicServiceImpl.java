@@ -34,6 +34,13 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
+    public List<Topic> findAllTopicsByUser(User user) {
+        List<Topic> list = new ArrayList<>();
+        topicRepository.findAllTopicsByUser(user).iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    @Override
     public Topic findByName(String topicname) {
         Topic topic = topicRepository.findByTopicname(topicname.toLowerCase().replaceAll("_", " "));
         if (topic == null) {
