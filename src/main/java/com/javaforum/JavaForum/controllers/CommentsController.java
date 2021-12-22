@@ -43,6 +43,16 @@ public class CommentsController {
         return new ResponseEntity<>(allComments, HttpStatus.OK);
     }
 
+    // Deletes all comments for a topic, given a valid topicid
+    // Link: http://localhost:2019/comments/comments/10
+    // @param topicid - the id of the topic that you wish to delete all comments for
+    @DeleteMapping(value = "/comments/{topicid}")
+    public ResponseEntity<?> deleteAllCommentsForTopic(@PathVariable long topicid){
+        Topic topic = topicService.findById(topicid);
+        commentService.deleteAllCommentsByTopic(topic);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     // Returns single comment based off id
     // Link: http://localhost:2019/comments/comment/4
     @GetMapping(value="/comment/{commentid}", produces = "application/json")

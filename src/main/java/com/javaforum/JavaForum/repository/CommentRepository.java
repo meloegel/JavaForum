@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface CommentRepository extends CrudRepository<Comment, Long> {
     List<Comment> findAllCommentsByTopic(Topic topic);
+
+    void deleteAllCommentsByTopic(Topic Topic);
 }

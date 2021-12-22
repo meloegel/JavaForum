@@ -35,6 +35,12 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAllCommentsByTopic(topic);
     }
 
+    @Transactional
+    @Override
+    public void deleteAllCommentsByTopic(Topic topic) {
+        commentRepository.deleteAllCommentsByTopic(topic);
+    }
+
     @Override
     public Comment findById(long id) {
         return commentRepository.findById(id)
@@ -75,4 +81,5 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public void deleteAll() { commentRepository.deleteAll();}
+
 }

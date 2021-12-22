@@ -16,4 +16,6 @@ public interface CommentService {
     Comment save(long userid, long topicid, Comment comment);
 
     void deleteAll();
+
+    void deleteAllCommentsByTopic(Topic topic);
 }
