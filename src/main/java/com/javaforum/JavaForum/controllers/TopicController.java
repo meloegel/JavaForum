@@ -2,6 +2,7 @@ package com.javaforum.JavaForum.controllers;
 
 import com.javaforum.JavaForum.models.Topic;
 import com.javaforum.JavaForum.models.User;
+import com.javaforum.JavaForum.services.CommentService;
 import com.javaforum.JavaForum.services.TopicService;
 import com.javaforum.JavaForum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class TopicController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CommentService commentService;
 
     // Returns a list of all topics
     // Link: http://localhost:2019/topics/topics
@@ -114,11 +118,13 @@ public class TopicController {
         return new ResponseEntity<>(updateTopic, HttpStatus.OK);
     }
 
-    // Deletes a given topic
+    // Deletes a given topic and its comments
     // Link: http://localhost:2019/topics/topic/14
     // @param topicid - The primary key of the topic you wish to delete
     @DeleteMapping(value = "/topic/{topicid}")
     public ResponseEntity<?> deleteTopicById(@PathVariable long topicid) {
+        Topic topic = topicService.findById(topicid);
+        commentService.deleteAllCommentsByTopic(topic);
         topicService.delete(topicid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
