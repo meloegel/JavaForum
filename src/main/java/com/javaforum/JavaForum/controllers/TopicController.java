@@ -45,6 +45,9 @@ public class TopicController {
         return new ResponseEntity<>(allTopics, HttpStatus.OK);
     }
 
+    // Returns a list of all topics for a valid user
+    // Link: http://localhost:2019/topics/4
+    // @param userid - id of user you wish to return all topics for
     @GetMapping(value = "/topics/{userid}", produces = "application/json")
     public ResponseEntity<?> listAllTopicsByUser(@PathVariable Long userid) {
         User user = userService.findUserById(userid);
@@ -54,6 +57,7 @@ public class TopicController {
 
     // Return a Topic object based on a given topicname
     // Link: http://localhost:2019/topics/topic/name/cinnamon
+    // @param topicname - Name of the topic you wish to find
     @GetMapping(value="/topic/name/{topicname}", produces = "application/json")
     public ResponseEntity<?> getTopicByName(@PathVariable String topicname) {
         Topic topic = topicService.findByName(topicname);
