@@ -50,7 +50,7 @@ public class Topic extends Auditable{
     @JsonIgnoreProperties(value = {"topics", "roles"}, allowSetters = true)
     private User user;
 
-    @OneToMany(mappedBy = "commentid", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "topicid", allowSetters = true)
     private List<Comment> comments = new ArrayList<>();
 
