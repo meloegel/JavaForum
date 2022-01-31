@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -86,7 +85,7 @@ public class TopicController {
     // @param userid - id of user posting topic
     // @return A location header with the URI to the newly created topic and a status of CREATED
     @PostMapping(value = "/{userid}/topic", consumes = "application/json")
-    public ResponseEntity<?> addNewTopic(@PathVariable long userid, @Valid @RequestBody Topic newTopic) throws URISyntaxException {
+    public ResponseEntity<?> addNewTopic(@PathVariable long userid, @RequestBody Topic newTopic) throws URISyntaxException {
         newTopic.setTopicid(0);
         newTopic = topicService.save(userid, newTopic);
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -104,7 +103,7 @@ public class TopicController {
     // @param updateTopic - A complete Topic object
     // @param topicid     The primary key of the topic you wish to replace.
     @PutMapping(value = "/topic/{topicid}", consumes = "application/json")
-    public ResponseEntity<?> updateFullTopic(@Valid @RequestBody Topic updatedTopic, @PathVariable long topicid) {
+    public ResponseEntity<?> updateFullTopic( @RequestBody Topic updatedTopic, @PathVariable long topicid) {
         updatedTopic.setTopicid(topicid);
         topicService.save(topicid, updatedTopic);
         return new ResponseEntity<>(updatedTopic, HttpStatus.OK);

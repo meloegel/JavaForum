@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -71,7 +70,7 @@ public class UserController {
     // @param newuser A complete new user to add including emails and roles. (role must already exist.)
     // @return A location header with the URI to the newly created user and a status of CREATED
     @PostMapping(value = "/user", consumes = "application/json")
-    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newUser) throws URISyntaxException {
+    public ResponseEntity<?> addNewUser( @RequestBody User newUser) throws URISyntaxException {
         newUser.setUserid(0);
         newUser = userService.save(newUser);
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -90,7 +89,7 @@ public class UserController {
     //      roles to be used to replace the User. Roles must already exist.
     // @param userid     The primary key of the user you wish to replace.
     @PutMapping(value = "/user/{userId}", consumes = "application/json")
-    public ResponseEntity<?> updateFullUser(@Valid @RequestBody User updatedUser, @PathVariable long userId) {
+    public ResponseEntity<?> updateFullUser( @RequestBody User updatedUser, @PathVariable long userId) {
         updatedUser.setUserid(userId);
         userService.save(updatedUser);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);

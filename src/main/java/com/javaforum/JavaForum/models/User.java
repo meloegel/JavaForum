@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import javax.validation.constraints.Email;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,7 +31,6 @@ public class User extends Auditable{
 
 
     @Column(nullable = false, unique = true)
-    @Email
     private String email;
 
 

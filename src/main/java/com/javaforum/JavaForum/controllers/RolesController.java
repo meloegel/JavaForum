@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class RolesController {
     // Link: http://localhost:2019/roles/role
     // @param newRole - A complete new Role object
     @PostMapping(value = "/role", consumes = "application/json")
-    public ResponseEntity<?> addNewRole(@Valid @RequestBody Role newRole) {
+    public ResponseEntity<?> addNewRole( @RequestBody Role newRole) {
         newRole.setRoleid(0);
         newRole = roleService.save(newRole);
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -71,7 +70,7 @@ public class RolesController {
     // @param roleid - The primary key (long) of the role you wish to update
     // @param newRole - The new name (String) for the role
     @PutMapping(value = "/role/{roleid}", consumes = {"application/json"})
-    public ResponseEntity<?> updateRole(@PathVariable long roleid, @Valid @RequestBody Role newRole) {
+    public ResponseEntity<?> updateRole(@PathVariable long roleid, @RequestBody Role newRole) {
         newRole = roleService.update(roleid, newRole);
         return new ResponseEntity<>(newRole, HttpStatus.OK);
     }

@@ -21,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class OpenController {
     //  @param httpServletRequest - The request that comes in for creating the new user
     //  @param newminuser - A special minimum set of data that is needed to create a new user
     @PostMapping(value = "/createNewUser", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addSelf(HttpServletRequest httpServletRequest, @Valid @RequestBody UserMinimum newminuser)
+    public ResponseEntity<?> addSelf(HttpServletRequest httpServletRequest, @RequestBody UserMinimum newminuser)
             throws URISyntaxException {
 
         User newuser = new User();

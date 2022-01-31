@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -70,7 +68,7 @@ public class CommentsController {
     @PostMapping(value = "/{userid}/{topicid}/comment", consumes = "application/json")
     public ResponseEntity<?> addNewComment(@PathVariable long userid,
                                            @PathVariable long topicid,
-                                           @Valid @RequestBody Comment newComment)
+                                           @RequestBody Comment newComment)
             throws URISyntaxException {
         newComment.setCommentid(0);
         newComment = commentService.save(userid, topicid, newComment);

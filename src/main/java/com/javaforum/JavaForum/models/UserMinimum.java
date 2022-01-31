@@ -1,12 +1,10 @@
 package com.javaforum.JavaForum.models;
 
-import javax.validation.constraints.Email;
 
 
 public class UserMinimum {
     private String username;
     private String password;
-    @Email
     private String email;
 
     public String getUsername() {
